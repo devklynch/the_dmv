@@ -33,9 +33,11 @@ RSpec.describe Facility do
   describe '#register vehicle' do
     it 'can register a car' do
       expect(@facility.registered_vehicles.count).to eq(0)
-
+      expect(@cruz.registration_date).to eq(nil)
      @facility.register_vehicle(@cruz)
       expect(@facility.registered_vehicles.count).to eq(1)
+      expect(@cruz.registration_date.class).to eq(Time)
+      
     end
   end
 
