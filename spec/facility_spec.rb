@@ -35,6 +35,7 @@ RSpec.describe Facility do
       expect(@facility.registered_vehicles.count).to eq(0)
       expect(@cruz.registration_date).to eq(nil)
       expect(@cruz.plate_type).to eq(nil)
+      expect(@facility.collected_fees).to eq(0)
 
      @facility.register_vehicle(@cruz)
      @facility.register_vehicle(@bolt)
@@ -45,6 +46,7 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
       expect(@bolt.plate_type).to eq(:ev)
       expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility.collected_fees).to eq(325)
       
     end
   end
