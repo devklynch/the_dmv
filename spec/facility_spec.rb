@@ -101,12 +101,34 @@ end
 
    @facility_1.administer_written_test(@registrant_1)
   #require "pry" ; binding .pry
-   expect(@registrant_1.license_data[:written]).to eq(true)
+
 
    expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+   expect(@registrant_1.license_data[:license]).to eq(true)
 
-   
+
+
+
   end
+  end
+
+
+  describe 'renew drivers license' do
+    it 'can renew a license' do
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      expect(@registrant_1.license_data[:license]).to eq(false)
+
+      @facility_1.add_service("Road Test")
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+      @facility_1.add_service("Renew License")
+
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+      expect(@registrant_1.license_data[:renewed]).to eq(true)
+    end
   end
 #last end
 end
