@@ -64,7 +64,7 @@ RSpec.describe Facility do
 
   end
 
-  describe '#administer_written_test' do
+  describe '#administer written test' do
   it 'can give a written test to registrants' do
     expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
     expect(@registrant_1.license_data[:written]).to eq(false)
@@ -88,5 +88,25 @@ RSpec.describe Facility do
     expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
 end
 end
+
+  describe '#administer road test' do
+  it'gives a license once completing the road test' do
+    expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+    expect(@registrant_1.license_data[:license]).to eq(false)
+
+   @facility_1.add_service("Road Test")
+   @facility_1.add_service("Written Test")
+
+   expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+
+   @facility_1.administer_written_test(@registrant_1)
+  #require "pry" ; binding .pry
+   expect(@registrant_1.license_data[:written]).to eq(true)
+
+   expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+
+   
+  end
+  end
 #last end
 end
