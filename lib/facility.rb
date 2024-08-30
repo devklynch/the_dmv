@@ -21,7 +21,7 @@ class Facility
 
   def register_vehicle(vehicle)
     if vehicle.registration_date == nil
-      vehicle.registration_date=Time.now
+      vehicle.registration_date= Date.today
       if vehicle.engine == :ev
         vehicle.plate_type = :ev
         @collected_fees += 200
@@ -37,4 +37,15 @@ class Facility
       nil
     end
   end
+
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && registrant.age >= 16 && registrant.permit == true
+      registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
+
+
+
 end
