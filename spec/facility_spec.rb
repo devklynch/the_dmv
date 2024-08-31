@@ -130,5 +130,7 @@ end
       expect(@registrant_1.license_data[:renewed]).to eq(true)
     end
   end
+
+
 #last end
 end

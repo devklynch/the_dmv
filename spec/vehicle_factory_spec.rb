@@ -1,4 +1,4 @@
-require 'spec_helper'
+acrequire 'spec_helper'
 
 RSpec.describe Vehicle do
   before(:each) do

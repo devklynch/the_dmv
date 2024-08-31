@@ -8,9 +8,13 @@ class Facility
 
   def initialize(facility)
     @name = facility[:name]
+    @name = facility[:dmv_office]
     @address = facility[:address]
+    @address = facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip]
+      #+ facility[address__1] + " "
     @phone = facility[:phone]
     @services = []
+    @services = facility[:services_p]
     @registered_vehicles =[]
     @collected_fees = 0
   end
