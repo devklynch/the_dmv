@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name,
+  attr_accessor :name,
               :address,
               :phone,
               :services,
@@ -7,14 +7,15 @@ class Facility
               :collected_fees
 
   def initialize(facility)
-    @name = facility[:name]
-    @name = facility[:dmv_office]
-    @address = facility[:address]
-    @address = facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip]
+    @name = facility[:name] || facility[:dmv_office] ||  "None Name"
+   # @name = facility[:dmv_office]
+
+   #@address = facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip]
       #+ facility[address__1] + " "
+    @address = facility[:address] || facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip]
     @phone = facility[:phone]
-    @services = []
-    @services = facility[:services_p]
+    @services = facility[:services_p]|| []
+   # @services = facility[:services_p]
     @registered_vehicles =[]
     @collected_fees = 0
   end
