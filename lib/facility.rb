@@ -12,10 +12,7 @@ class Facility
 
    #@address = facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip]
       #+ facility[address__1] + " "
-    @address = facility[:address] || "Test"
-    #facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip] || "Test"
-    #facility[:address_line_1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip_code]
-    #facility[:address1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zipcode]
+    @address = address_creator(facility)
     @phone = facility[:phone] || facility[:public_phone_number]
     @services = facility[:services_p]|| []
    # @services = facility[:services_p]
@@ -26,6 +23,21 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def address_creator(facility)
+    if facility[:address]
+       facility[:address]
+    elsif facility[:address_li]
+      facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip] 
+
+    elsif facility[:address_line_1]
+      facility[:address_line_1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip_code]
+    elsif facility[:address1]
+      facility[:address1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zipcode]
+    else
+    "No Address"
+  end
+end
 
   def register_vehicle(vehicle)
     if vehicle.registration_date == nil
