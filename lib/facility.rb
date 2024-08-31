@@ -7,13 +7,16 @@ class Facility
               :collected_fees
 
   def initialize(facility)
-    @name = facility[:name] || facility[:dmv_office] ||  "None Name"
+    @name = facility[:name] || facility[:dmv_office] || facility[:office_name] ||  "None Name"
    # @name = facility[:dmv_office]
 
    #@address = facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip]
       #+ facility[address__1] + " "
-    @address = facility[:address] || facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip]
-    @phone = facility[:phone]
+    @address = facility[:address] || "Test"
+    #facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip] || "Test"
+    #facility[:address_line_1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip_code]
+    #facility[:address1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zipcode]
+    @phone = facility[:phone] || facility[:public_phone_number]
     @services = facility[:services_p]|| []
    # @services = facility[:services_p]
     @registered_vehicles =[]
