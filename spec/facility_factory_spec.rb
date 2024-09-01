@@ -16,7 +16,7 @@ describe 'can import for other states' do
         @new_york_facilities =DmvDataService.new.ny_dmv_office_locations
       #binding.pry
         @fac_factory.create_facilities(@new_york_facilities)
-        #binding.pry
+     #binding.pry
         expect(@fac_factory).to be_an_instance_of(FacilityFactory)
         expect(@fac_factory.facility_list[0]).to be_an_instance_of(Facility)
     end

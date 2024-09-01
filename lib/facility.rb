@@ -9,7 +9,8 @@ class Facility
   def initialize(facility)
     @name = facility[:name] || facility[:dmv_office] || facility[:office_name] ||  "No Name"
     @address = address_creator(facility)
-    @phone = facility[:phone] || facility[:public_phone_number] || "No Phone Number"
+    @phone = phone_creator(facility)
+    #@phone = facility[:phone] || facility[:public_phone_number] || "No Phone Number"
     @services = services_creator(facility) 
     @registered_vehicles =[]
     @collected_fees = 0
@@ -38,6 +39,19 @@ def services_creator(facility)
     facility[:services_p].split(",")
   else
     []
+  end
+end
+
+def phone_creator(facility)
+  if facility[:phone]
+    facility[:phone]
+  elsif facility[:public_phone_number]
+    phone= facility[:public_phone_number]
+    "(" + phone[0,3] + ")" + phone[3,3] + "-" + phone[6,4]
+
+  else
+    "No Phone Numer"
+
   end
 end
  
