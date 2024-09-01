@@ -169,5 +169,79 @@ end
 end
 
 
+describe '#facility tests for NY' do
+    it 'can register a car to imported NY facilities' do
+      @fac_factory=FacilityFactory.new
+      @new_york_facilities =DmvDataService.new.ny_dmv_office_locations
+      
+    #binding.pry
+      @fac_factory.create_facilities(@new_york_facilities)
+
+      @hudson_branch = @fac_factory.facility_list[0]
+     expect(@hudson_branch.registered_vehicles.count).to eq(0)
+
+
+      @hudson_branch.register_vehicle(@cruz)
+      expect(@hudson_branch.collected_fees).to eq(100)
+
+    end
+    it 'can administer written tests to imported NY facilities' do
+    
+
+      @fac_factory=FacilityFactory.new
+      @new_york_facilities =DmvDataService.new.ny_dmv_office_locations
+      
+    #binding.pry
+      @fac_factory.create_facilities(@new_york_facilities)
+
+      @hudson_branch = @fac_factory.facility_list[0]
+#binding.pry
+    expect(@hudson_branch.administer_written_test(@registrant_1)).to eq(false)
+    expect(@registrant_1.license_data[:written]).to eq(false)
+
+   @hudson_branch.add_service("Written Test")
+
+    expect(@hudson_branch.administer_written_test(@registrant_1)).to eq(true)
+    expect(@registrant_1.license_data[:written]).to eq(true)
+  end
+end
+
+describe '#facility tests for MO' do
+    it 'can register a car to imported MO facilities' do
+      @fac_factory=FacilityFactory.new
+      @missouri_facilities =DmvDataService.new.mo_dmv_office_locations
+      
+    #binding.pry
+      @fac_factory.create_facilities(@missouri_facilities)
+
+      @oakville_branch = @fac_factory.facility_list[0]
+     expect(@oakville_branch.registered_vehicles.count).to eq(0)
+
+
+      @oakville_branch.register_vehicle(@cruz)
+      expect(@oakville_branch.collected_fees).to eq(100)
+
+    end
+    it 'can administer written tests to imported MO facilities' do
+    
+
+      @fac_factory=FacilityFactory.new
+      @missouri_facilities =DmvDataService.new.mo_dmv_office_locations
+      
+    #binding.pry
+      @fac_factory.create_facilities(@missouri_facilities)
+
+      @oakville_branch = @fac_factory.facility_list[0]
+
+    expect(@oakville_branch.administer_written_test(@registrant_1)).to eq(false)
+    expect(@registrant_1.license_data[:written]).to eq(false)
+
+   @oakville_branch.add_service("Written Test")
+
+    expect(@oakville_branch.administer_written_test(@registrant_1)).to eq(true)
+    expect(@registrant_1.license_data[:written]).to eq(true)
+    end
+  end
+
 #last end
 end
