@@ -64,6 +64,30 @@ RSpec.describe Facility do
 
   end
 
+  describe '#register vehicle from wa import' do
+    it 'can register a car' do
+      @factory=VehicleFactory.new
+      @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      #binding .pry
+     @factory.create_vehicles(@wa_ev_registrations)
+
+      expect(@facility_1.registered_vehicles.count).to eq(0)
+      expect(@factory.vehicle_list[0].registration_date).to eq(nil)
+      expect(@factory.vehicle_list[0].plate_type).to eq(nil)
+      expect(@facility_1.collected_fees).to eq(0)
+
+     @facility_1.register_vehicle(@factory.vehicle_list[0])
+     expect(@factory.vehicle_list[0].plate_type).to eq(:ev)
+     expect(@factory.vehicle_list[0].registration_date.class).to eq(Date)
+     expect(@facility_1.collected_fees).to eq(200)
+
+  
+    end
+
+  end
+
+
+
   describe '#administer written test' do
   it 'can give a written test to registrants' do
     expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)

@@ -33,4 +33,18 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe 'can work with wa registration data' do
+    it 'can determine if a vehicle is an antique' do
+      @factory=VehicleFactory.new
+      @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      #binding .pry
+     @factory.create_vehicles(@wa_ev_registrations)
+
+     #binding.pry
+     expect(@factory.vehicle_list[0].antique?).to eq(false)
+     
+
+    end
+  end
 end
