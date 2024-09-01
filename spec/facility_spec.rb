@@ -131,6 +131,43 @@ end
     end
   end
 
+  describe '#facility tests for CO' do
+    it 'can register a car to imported CO facilities' do
+      @fac_factory=FacilityFactory.new
+      @colorado_facilities =DmvDataService.new.co_dmv_office_locations
+      
+    #binding.pry
+      @fac_factory.create_facilities(@colorado_facilities)
+
+      @tremont_branch = @fac_factory.facility_list[0]
+     expect(@tremont_branch.registered_vehicles.count).to eq(0)
+
+
+      @tremont_branch.register_vehicle(@cruz)
+      expect(@tremont_branch.collected_fees).to eq(100)
+
+    end
+    it 'can administer written tests to imported CO facilities' do
+    
+
+      @fac_factory=FacilityFactory.new
+      @colorado_facilities =DmvDataService.new.co_dmv_office_locations
+      
+    #binding.pry
+      @fac_factory.create_facilities(@colorado_facilities)
+
+      @tremont_branch = @fac_factory.facility_list[0]
+
+    expect(@tremont_branch.administer_written_test(@registrant_1)).to eq(false)
+    expect(@registrant_1.license_data[:written]).to eq(false)
+
+   @tremont_branch.add_service("Written Test")
+
+    expect(@tremont_branch.administer_written_test(@registrant_1)).to eq(true)
+    expect(@registrant_1.license_data[:written]).to eq(true)
+  end
+end
+
 
 #last end
 end

@@ -1,21 +1,16 @@
 class Facility
   attr_accessor :name,
-              :address,
-              :phone,
-              :services,
-              :registered_vehicles,
-              :collected_fees
+                :address,
+                :phone,
+                :services,
+                :registered_vehicles,
+                :collected_fees
 
   def initialize(facility)
-    @name = facility[:name] || facility[:dmv_office] || facility[:office_name] ||  "None Name"
-   # @name = facility[:dmv_office]
-
-   #@address = facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip]
-      #+ facility[address__1] + " "
+    @name = facility[:name] || facility[:dmv_office] || facility[:office_name] ||  "No Name"
     @address = address_creator(facility)
-    @phone = facility[:phone] || facility[:public_phone_number]
-    @services = facility[:services_p]|| []
-   # @services = facility[:services_p]
+    @phone = facility[:phone] || facility[:public_phone_number] || "No Phone Number"
+    @services = services_creator(facility) 
     @registered_vehicles =[]
     @collected_fees = 0
   end
@@ -28,16 +23,24 @@ class Facility
     if facility[:address]
        facility[:address]
     elsif facility[:address_li]
-      facility[:address_li] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip] 
-
-    elsif facility[:address_line_1]
-      facility[:address_line_1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip_code]
+      facility[:address_li] + " " + (facility[:address__1] || "") + facility[:city] + " " + facility[:state] + " " + facility[:zip] 
+    elsif facility[:street_address_line_1]
+      facility[:street_address_line_1] + " " + (facility[:street_address_line_2] || "") + " " + facility[:city] + " " + facility[:state] + " " + facility[:zip_code]
     elsif facility[:address1]
       facility[:address1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zipcode]
     else
     "No Address"
   end
 end
+
+def services_creator(facility)
+  if facility[:services_p]
+    facility[:services_p].split(",")
+  else
+    []
+  end
+end
+ 
 
   def register_vehicle(vehicle)
     if vehicle.registration_date == nil
