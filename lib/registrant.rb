@@ -4,7 +4,6 @@ class Registrant
               :permit,
               :license_data
 
-  #attr_accessor :license_data
   def initialize (name, age, permit=false)
     @name = name
     @age = age
@@ -23,5 +22,4 @@ class Registrant
   def permit?
     @permit
   end
-
 end
