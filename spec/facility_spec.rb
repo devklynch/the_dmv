@@ -146,11 +146,11 @@ RSpec.describe Facility do
 
   describe '#facility tests for CO' do
     it 'can register a car to imported CO facilities' do
-      @fac_factory = FacilityFactory.new
+      @facility_factory = FacilityFactory.new
       @colorado_facilities = DmvDataService.new.co_dmv_office_locations
-      @fac_factory.create_facilities(@colorado_facilities)
+      @facility_factory.create_facilities(@colorado_facilities)
 
-      @tremont_branch = @fac_factory.facility_list[0]
+      @tremont_branch = @facility_factory.facility_list[0]
      expect(@tremont_branch.registered_vehicles.count).to eq(0)
 
       @tremont_branch.register_vehicle(@cruz)
@@ -158,11 +158,11 @@ RSpec.describe Facility do
     end
 
     it 'can administer written tests to imported CO facilities' do
-      @fac_factory = FacilityFactory.new
+      @facility_factory = FacilityFactory.new
       @colorado_facilities = DmvDataService.new.co_dmv_office_locations
       
-      @fac_factory.create_facilities(@colorado_facilities)
-      @tremont_branch = @fac_factory.facility_list[0]
+      @facility_factory.create_facilities(@colorado_facilities)
+      @tremont_branch = @facility_factory.facility_list[0]
 
       expect(@tremont_branch.administer_written_test(@registrant_1)).to eq(false)
       expect(@registrant_1.license_data[:written]).to eq(false)
@@ -176,11 +176,11 @@ RSpec.describe Facility do
 
   describe '#facility tests for NY' do
     it 'can register a car to imported NY facilities' do
-      @fac_factory = FacilityFactory.new
+      @facility_factory = FacilityFactory.new
       @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
       
-      @fac_factory.create_facilities(@new_york_facilities)
-      @hudson_branch = @fac_factory.facility_list[0]
+      @facility_factory.create_facilities(@new_york_facilities)
+      @hudson_branch = @facility_factory.facility_list[0]
 
       expect(@hudson_branch.registered_vehicles.count).to eq(0)
 
@@ -190,11 +190,11 @@ RSpec.describe Facility do
     end
 
     it 'can administer written tests to imported NY facilities' do
-      @fac_factory = FacilityFactory.new
+      @facility_factory = FacilityFactory.new
       @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
       
-      @fac_factory.create_facilities(@new_york_facilities)
-      @hudson_branch = @fac_factory.facility_list[0]
+      @facility_factory.create_facilities(@new_york_facilities)
+      @hudson_branch = @facility_factory.facility_list[0]
 
       expect(@hudson_branch.administer_written_test(@registrant_1)).to eq(false)
       expect(@registrant_1.license_data[:written]).to eq(false)
@@ -208,11 +208,11 @@ RSpec.describe Facility do
 
   describe '#facility tests for MO' do
     it 'can register a car to imported MO facilities' do
-      @fac_factory = FacilityFactory.new
+      @facility_factory = FacilityFactory.new
       @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
-      @fac_factory.create_facilities(@missouri_facilities)
-      @oakville_branch = @fac_factory.facility_list[0]
+      @facility_factory.create_facilities(@missouri_facilities)
+      @oakville_branch = @facility_factory.facility_list[0]
       expect(@oakville_branch.registered_vehicles.count).to eq(0)
 
       @oakville_branch.register_vehicle(@cruz)
@@ -221,11 +221,11 @@ RSpec.describe Facility do
     end
 
     it 'can administer written tests to imported MO facilities' do
-      @fac_factory = FacilityFactory.new
+      @facility_factory = FacilityFactory.new
       @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
       
-      @fac_factory.create_facilities(@missouri_facilities)
-      @oakville_branch = @fac_factory.facility_list[0]
+      @facility_factory.create_facilities(@missouri_facilities)
+      @oakville_branch = @facility_factory.facility_list[0]
 
       expect(@oakville_branch.administer_written_test(@registrant_1)).to eq(false)
       expect(@registrant_1.license_data[:written]).to eq(false)
