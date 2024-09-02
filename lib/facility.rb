@@ -10,7 +10,6 @@ class Facility
     @name = facility[:name] || facility[:dmv_office] || facility[:office_name] ||  "No Name"
     @address = address_creator(facility)
     @phone = phone_creator(facility)
-    #@phone = facility[:phone] || facility[:public_phone_number] || "No Phone Number"
     @services = services_creator(facility) 
     @registered_vehicles =[]
     @collected_fees = 0
@@ -30,35 +29,32 @@ class Facility
     elsif facility[:address1]
       facility[:address1] + " " + facility[:city] + " " + facility[:state] + " " + facility[:zipcode]
     else
-    "No Address"
+      "No Address"
+    end
   end
-end
 
-def services_creator(facility)
-  if facility[:services_p]
-    facility[:services_p].split(",")
-  else
-    []
+  def services_creator(facility)
+    if facility[:services_p]
+      facility[:services_p].split(",")
+    else
+      []
+    end
   end
-end
 
-def phone_creator(facility)
-  if facility[:phone]
-    facility[:phone]
-  elsif facility[:public_phone_number]
-    phone= facility[:public_phone_number]
-    "(" + phone[0,3] + ")" + phone[3,3] + "-" + phone[6,4]
-
-  else
-    "No Phone Numer"
-
+  def phone_creator(facility)
+    if facility[:phone]
+      facility[:phone]
+    elsif facility[:public_phone_number]
+      phone= facility[:public_phone_number]
+      "(" + phone[0,3] + ") " + phone[3,3] + "-" + phone[6,4]
+    else
+      "No Phone Number"
+    end
   end
-end
- 
 
   def register_vehicle(vehicle)
     if vehicle.registration_date == nil
-      vehicle.registration_date= Date.today
+      vehicle.registration_date = Date.today
       if vehicle.engine == :ev
         vehicle.plate_type = :ev
         @collected_fees += 200
@@ -83,7 +79,6 @@ end
     end
   end
 
-
   def administer_road_test(registrant)
     if @services.include?("Road Test") && registrant.license_data[:written] ==true
       registrant.license_data[:license] = true
@@ -96,9 +91,7 @@ end
     if @services.include?("Renew License") && registrant.license_data[:license] == true
       registrant.license_data[:renewed] =true
     else
-    false
+      false
+    end
   end
-end
-
-
 end
