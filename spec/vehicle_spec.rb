@@ -6,6 +6,7 @@ RSpec.describe Vehicle do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@cruz).to be_an_instance_of(Vehicle)
@@ -38,13 +39,8 @@ RSpec.describe Vehicle do
     it 'can determine if a vehicle is an antique' do
       @factory=VehicleFactory.new
       @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-      #binding .pry
      @factory.create_vehicles(@wa_ev_registrations)
-
-     #binding.pry
      expect(@factory.vehicle_list[0].antique?).to eq(false)
-     
-
     end
   end
 end

@@ -12,13 +12,10 @@ class Vehicle
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin] || vehicle_details[:vin_1_10]
-    #@vin = vehicle_details[:vin]
     @year = vehicle_details[:year] || vehicle_details[:model_year]
-    #@year = vehicle_details[:year]
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine] || :ev
-   # @engine = vehicle_details[:engine]
     @registration_date = nil
     @plate_type = nil
   end
