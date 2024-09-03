@@ -3,12 +3,11 @@ require 'spec_helper'
 RSpec.describe Registrant do
   before(:each) do
   @registrant_1=Registrant.new('Bruce', 18, true)
-  @registrant_2=Registrant.new('Penny',16)
+  @registrant_2=Registrant.new('Penny',15)
   @registrant_3 = Registrant.new('Tucker', 15 )
 
   @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
   @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
-
   end
 
   describe '#initialize' do
@@ -26,6 +25,7 @@ RSpec.describe Registrant do
   describe '#earn permit' do
     it 'can earn a permit' do
       expect(@registrant_2.permit).to eq(false)
+
       @registrant_2.earn_permit
       expect(@registrant_2.permit).to eq(true)
     end
@@ -40,7 +40,4 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to eq(true)
     end
   end
-
-
-
 end
