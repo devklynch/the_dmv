@@ -41,6 +41,11 @@ RSpec.describe Vehicle do
       @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
      @factory.create_vehicles(@wa_ev_registrations)
      expect(@factory.vehicle_list[0].antique?).to eq(false)
+     expect(@factory.vehicle_list[0].vin).to eq("5YJYGDED6M")
+     expect(@factory.vehicle_list[0].year).to eq(2021)
+     expect(@factory.vehicle_list[0].make).to eq("TESLA")
+     expect(@factory.vehicle_list[0].model).to eq("Model Y")
+     expect(@factory.vehicle_list[0].registration_date).to eq(nil)
     end
   end
 end
