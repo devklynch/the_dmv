@@ -11,7 +11,7 @@ class Facility
     @address = address_creator(facility)
     @phone = phone_creator(facility)
     @services = services_creator(facility) 
-    @registered_vehicles =[]
+    @registered_vehicles = []
     @collected_fees = 0
   end
 
@@ -45,7 +45,7 @@ class Facility
     if facility[:phone]
       facility[:phone]
     elsif facility[:public_phone_number]
-      phone= facility[:public_phone_number]
+      phone = facility[:public_phone_number]
       "(" + phone[0,3] + ") " + phone[3,3] + "-" + phone[6,4]
     else
       "No Phone Number"
@@ -89,7 +89,7 @@ class Facility
 
   def renew_drivers_license(registrant)
     if @services.include?("Renew License") && registrant.license_data[:license] == true
-      registrant.license_data[:renewed] =true
+      registrant.license_data[:renewed] = true
     else
       false
     end

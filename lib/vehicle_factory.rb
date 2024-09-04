@@ -4,11 +4,11 @@ class VehicleFactory
   attr_reader :vehicle_list
 
   def initialize
-    @vehicle_list=[]
+    @vehicle_list = []
   end
 
   def create_vehicles(vehicles)
-    @vehicle_list= vehicles.map do |vehicle_details,index|
+    @vehicle_list = vehicles.map do |vehicle_details|
       Vehicle.new(vehicle_details)
     end
   end
