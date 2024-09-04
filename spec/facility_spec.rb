@@ -68,7 +68,7 @@ RSpec.describe Facility do
 
   describe '#register vehicle from wa import' do
     it 'can register a car' do
-      @factory=VehicleFactory.new
+      @factory = VehicleFactory.new
       @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
      @factory.create_vehicles(@wa_ev_registrations)
       expect(@facility_1.registered_vehicles.count).to eq(0)

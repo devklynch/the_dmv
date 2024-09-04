@@ -4,7 +4,7 @@ class Registrant
               :permit,
               :license_data
 
-  def initialize (name, age, permit=false)
+  def initialize (name, age, permit = false)
     @name = name
     @age = age
     @permit = permit
@@ -16,7 +16,7 @@ class Registrant
   end
 
   def earn_permit
-    @permit =true
+    @permit = true
   end
 
   def permit?
